@@ -1,0 +1,46 @@
+import time
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.select import Select
+
+ser_Obj=Service("C:\Drivers\chromedriver_win32\chromedriver.exe")
+driver=webdriver.Chrome(service=ser_Obj)
+driver.get("https://demo.nopcommerce.com/") #website Link
+driver.maximize_window() #Maximize Window
+
+#Validation
+act_title=driver.title
+Expec_Title="nopCommerce demo store"
+if act_title == Expec_Title:
+    print("Test Passed")
+else:
+    print("Test Fail")
+
+driver.find_element(By.LINK_TEXT, "Register").click()
+driver.find_element(By.XPATH, "//input[@id='gender-male']").click()
+driver.find_element(By.XPATH,"//input[@name='FirstName']").send_keys("SaiRam")
+driver.find_element(By.XPATH,"//input[@id='LastName']").send_keys("Beecharaju")
+
+#Used Select Class for dropdown
+drop_down=driver.find_element(By.XPATH,"//select[@name='DateOfBirthDay']")
+select= Select(drop_down)
+select.select_by_value("16")
+
+drop_down1=driver.find_element(By.XPATH,"//select[@name='DateOfBirthMonth']")
+select=Select(drop_down1)
+select.select_by_visible_text("July")
+
+drop_down2=driver.find_element(By.XPATH,"//select[@name='DateOfBirthYear']")
+select=Select(drop_down2)
+select.select_by_value("1995")
+
+driver.find_element(By.XPATH, "//input[@id='Email']").send_keys("beecharajusairam@gmail.com")
+driver.find_element(By.XPATH, "//input[@id='Company']").send_keys("HGS Solutions Pvt.Ltd")
+driver.find_element(By.XPATH, "//input[@id='Password']").send_keys("Sairam*123")
+driver.find_element(By.XPATH, "//input[@id='ConfirmPassword']").send_keys("Sairam*123")
+driver.find_element(By.XPATH, "//button[@id='register-button']").click()
+
+time.sleep(10)
+
+driver.quit()
