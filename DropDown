@@ -1,0 +1,30 @@
+import time
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.select import Select
+
+ser_Obj=Service("C:\Drivers\chromedriver_win32\chromedriver.exe")
+driver=webdriver.Chrome(service=ser_Obj)
+
+driver.get("https://www.opencart.com/index.php?route=account/register")
+driver.maximize_window()
+
+drop_down=driver.find_element(By.XPATH, "//select[@id='input-country']")
+select = Select(drop_down)
+# select.select_by_visible_text("India")
+# time.sleep(5)
+#
+# #to capture all Options and print the text in console
+All_Options=select.options
+print(len(All_Options))
+#
+# for option in All_Options:
+#     print(option.text)
+
+#Select the option from the dropdown without using built in functions
+for option in All_Options:
+    if option.text =="India":
+        option.click()
+
+
