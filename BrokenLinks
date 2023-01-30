@@ -1,0 +1,31 @@
+# we need to install requests package through Settings
+import requests as requests
+import time
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+
+ser_Obj=Service("C:\Drivers\chromedriver_win32\chromedriver.exe")
+driver=webdriver.Chrome(service=ser_Obj)
+
+#Broken Links: The link which don't have Target Page
+
+driver.get("http://www.deadlinkcity.com/")
+driver.maximize_window()
+
+All_Links=driver.find_elements(By.TAG_NAME, 'a')
+count =0
+
+for link in All_Links:
+    Url=link.get_attribute('href')
+    try:
+        response=requests.head(Url)
+    except:
+        None
+
+    if response.status_code>=400:
+        print(Url, "is a broken link")
+        count+=1
+
+    else:
+        print(Url, "is a valid Link")
