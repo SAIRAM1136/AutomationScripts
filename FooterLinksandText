@@ -1,0 +1,17 @@
+import time
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.select import Select
+
+ser_Obj=Service("C:\Drivers\chromedriver_win32\chromedriver.exe")
+driver=webdriver.Chrome(service=ser_Obj)
+driver.get("https://demo.nopcommerce.com/")
+
+#this locator is used to get All the Links in the Footer
+Links=driver.find_elements(By.XPATH,"//div[@class='footer']//a")
+print(len(Links))
+#using ForLoop to get all the Text of the Links
+for ele in Links:
+    print(ele.text)
+driver.quit()
