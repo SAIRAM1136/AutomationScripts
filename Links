@@ -1,0 +1,32 @@
+import time
+
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+
+ser_Obj=Service("C:\Drivers\chromedriver_win32\chromedriver.exe")
+driver=webdriver.Chrome(service=ser_Obj)
+driver.implicitly_wait(5)
+
+#Links :
+    # Internal Link : Opens in same page
+    # External Links : Opens in Other Page
+    # Broken Link : Links are broken
+
+driver.get("https://demo.nopcommerce.com/")
+driver.maximize_window()
+
+#Click on Link
+# driver.find_element(By.LINK_TEXT, "Digital downloads").click()
+# time.sleep(5)
+
+#total no. of links in a Webpage
+# total_Links=driver.find_elements(By.TAG_NAME,'a')
+# print(len(total_Links))
+# #to print all the links text
+# for link in total_Links:
+#     print(link.text)
+
+
+
+
